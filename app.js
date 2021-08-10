@@ -28,5 +28,14 @@ ProductPicture.allImages = [];
 //prevent last picked products from being picked
 const renderNewProduct = function(leftIndex, centerIndex, rightIndex){
     console.log('create the image src="X" for left, center and right images', leftIndex);
-    
+    console.log('ProductPicture.allImages[leftIndex].url;', ProductPicture.allImages[leftIndex].url);
+    leftProductImgTag.src = ProductPicture[leftIndex].url;
+    centerProductImgTag.src = ProductPicture[centerIndex].url;
+    rightProductImgTag.src = ProductPicture[rightIndex].url;
+};
+
+const pickNewProduct = function(){
+    const leftIndex = Math.floor(Math.random() * ProductPicture.allImages.length);
+    console.log('leftIndex', leftIndex);
+
 }
