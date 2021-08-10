@@ -1,17 +1,17 @@
 'use strict';
 console.log('js file is connected');
 
-const productImageSectionTag = document.getElementById('allProducts');
+// const productImageSectionTag = document.getElementById('allProducts');
 const leftProductImgTag = document.getElementById('leftProductImage');
 const centerProductImgTag = document.getElementById('centerProduct');
 const rightProductImgTag = document.getElementById('rightProduct');
 
 let totalClicks = 0;
 
-//variables to store products already on the page.
-let leftProductOnPage = null;
-let centerProductOnPage = null;
-let rightProductOnPage = null;
+// //variables to store products already on the page.
+// let leftProductOnPage = null;
+// let centerProductOnPage = null;
+// let rightProductOnPage = null;
 
 //constructor function
 const ProductPicture = function(name, imageSrc){
