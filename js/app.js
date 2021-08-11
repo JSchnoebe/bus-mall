@@ -16,15 +16,23 @@ let allProducts = [];
 
 
 //constructor function
-function Product(name, imageSrc){
+function Product(name, imageSrc, clicks, timesShown){
     this.name = name;
     this.imageSrc = imageSrc;
     //count product votes.
-    this.clicks = 0;
-    this.timesShown = 0;
+    if(clicks){
+        this.clicks = clicks;
+    } else {
+        this.clicks = 0;
+    }
+    if(timesShown){
+        this.timesShown = timesShown;
+    } else {
+        this.timesShown = 0;
+    }
     //push object into our array to store the product object.
     allProducts.push(this);
-};
+}
 
 console.log('all products',allProducts);
 
@@ -38,17 +46,22 @@ function getProductArray(nameOfThePropertyIWant){
     return answer;
   }
 
+let savedProductString = localStorage.getItem('savedProduct');
+console.log('this is the objects in string form ', savedProductString);
 
+if(savedProductString){
+    let arrayOfNotPizzaObject = JSON.parse(savedProductString);
+    console.log('if condition what is our type ',arrayOfNotPizzaObject);
 
-
-
-
-
-
-
-
-
-
+    for(let j = 0; j < arrayOfNotPizzaObject.length; j++){
+        new Product(
+            arrayOfNotPizzaObject[j].name,
+            arrayOfNotPizzaObject[j].imageSrc,
+            arrayOfNotPizzaObject[j].clicks,
+            arrayOfNotPizzaObject[j].timesShown
+        );
+    }
+} else {
 
 new Product('R2D2 Bag', 'images/bag.jpg');
 new Product('Banana Slicer', 'images/banana.jpg');
@@ -69,6 +82,7 @@ new Product('Star Wars Sleeping Bag', 'images/tauntaun.jpg');
 new Product('Unicorn Meat', 'images/unicorn.jpg');
 new Product('Endless Water Can', 'images/water-can.jpg');
 new Product('Futuristic Wine Glass', 'images/wine-glass.jpg');
+}
 
 allProducts[0].timesShown = 1;
 allProducts[1].timesShown = 1;
@@ -147,6 +161,9 @@ function imageWasClicked(event){
     allProducts[productIndex3].timesShown++;
 
     if(totalClicks >= rounds){
+
+        localStorage.setItem('savedProduct', JSON.stringify(allProducts));
+
         let footerElement = document.getElementsByTagName('footer');
         //remove the first child h2
         if(footerElement.firstChildElement){
