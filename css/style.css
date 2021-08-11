@@ -1,0 +1,58 @@
+img {
+    height: 300px;
+    float: left;
+    width: 300px;
+    border: solid;
+    border-color: blue;
+    margin: 10px;
+}
+
+h1 {
+   background-color: rgba(0, 0, 253, 0.521); 
+   font-size: 40px;
+   font-style: oblique;
+   border: solid;
+   border-color: blue;
+   padding: 10px;
+   text-align: center;
+}
+
+body {
+    width: 1500px;
+    margin: 0 auto;
+    background-color: rgb(158, 187, 240);
+}
+
+#voteResults {
+    padding: 10px;
+}
+
+aside {
+    width: 550px;
+    background-color: rgba(0, 0, 255, 0.37);
+    margin-top: 10px;
+    padding: 10px;
+    border: solid;
+    border-color: blue;
+    display: inline-block;
+    
+}
+
+h2 {
+    font-size: 20px;
+    font-style: italic;
+    text-align: center;
+}
+
+#chartContainer {
+    width: 600px;
+    height: 500px;
+    display: inline-block;
+    margin-bottom: 100px;
+    margin-left: 100px
+}
+
+marquee {
+    color: red;
+}
+
