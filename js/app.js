@@ -16,15 +16,23 @@ let allProducts = [];
 
 
 //constructor function
-function Product(name, imageSrc){
+function Product(name, imageSrc, clicks, timesShown){
     this.name = name;
     this.imageSrc = imageSrc;
     //count product votes.
-    this.clicks = 0;
-    this.timesShown = 0;
+    if(clicks){
+        this.clicks = clicks;
+    } else {
+        this.clicks = 0;
+    }
+    if(timesShown){
+        this.timesShown = timesShown;
+    } else {
+        this.timesShown = 0;
+    }
     //push object into our array to store the product object.
     allProducts.push(this);
-};
+}
 
 console.log('all products',allProducts);
 
@@ -153,6 +161,9 @@ function imageWasClicked(event){
     allProducts[productIndex3].timesShown++;
 
     if(totalClicks >= rounds){
+
+        localStorage.setItem('savedProduct', JSON.stringify(allProducts));
+
         let footerElement = document.getElementsByTagName('footer');
         //remove the first child h2
         if(footerElement.firstChildElement){
