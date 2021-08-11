@@ -137,18 +137,28 @@ function imageWasClicked(event){
 
         for(let i = 0; i < allProducts.length; i++){
             let voteResultsListItem = document.createElement('li');
-            voteResultsListItem.textContent = ''
-            
+            voteResultsListItem.textContent = '${allProducts[i].name} was clicked on ${allProducts[i].clicks} times and was shown ${allProducts[i].timesShown} times ';
+            asideUL.appendChild(voteResultsListItem);
+
+            let percentageListItem = document.createElement.length('li');
+            let math;
+            if(allProducts[i].clicks === 0){
+                math = `Zero clicks and shown ${allProducts[i].timesShown} times. Must be a bad product.`;
+            } else {
+            math = Math.round(((allProducts[i]['clicks']/ allProducts[i]['timesShown']).toFixed(2) * 100)) + '%';
+            }
+            percentageListItem.textContent = `${allProducts[i].name} percentage of times clicked on vs times shown is ` + math;
+            asideUL.appendChild(percentageListItem);  
+        }//closes for loop
+
+        //remove event listener
+        for(let i = 0; i < imageElements.length; i++){
+            imageElements[i].removeEventListener('click', imageWasClicked);
+            console.log('Is this working?');
         }
+
+        runMyChartsNow();
     }
-
-    
-
-
-
-
-
-
 }
 
 
