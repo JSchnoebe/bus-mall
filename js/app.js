@@ -29,6 +29,16 @@ function Product(name, imageSrc){
 console.log('all products',allProducts);
 
 
+function getProductArray(nameOfThePropertyIWant){
+    let answer = [];
+    for(let i = 0; i < allProducts.length; i++){
+      answer[i] = allProducts[i][nameOfThePropertyIWant];
+    }
+    console.log(answer);
+    return answer;
+  }
+
+
 
 
 
@@ -60,7 +70,9 @@ new Product('Unicorn Meat', 'images/unicorn.jpg');
 new Product('Endless Water Can', 'images/water-can.jpg');
 new Product('Futuristic Wine Glass', 'images/wine-glass.jpg');
 
-
+allProducts[0].timesShown = 1;
+allProducts[1].timesShown = 1;
+allProducts[2].timesShown = 1;
 
 
 
@@ -85,19 +97,33 @@ function imageWasClicked(event){
     let nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
     let nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
 
-    
-
-
-    while(productIndex1 ===  nextProductIndex1 || productIndex1  === nextProductIndex2 || productIndex1 === nextProductIndex3){
-        nextProductIndex1 = Math.floor(Math.random() * allProducts.length);
+    while((nextProductIndex1 === productIndex1) ||
+      (nextProductIndex1 === productIndex2)     || 
+      (nextProductIndex1 === productIndex3)     || 
+      (nextProductIndex1 === nextProductIndex2) || 
+      (nextProductIndex1 === nextProductIndex3)  
+    ){
+    nextProductIndex1 = Math.floor(Math.random() * allProducts.length);
     }
+    while(
+    (nextProductIndex2 === productIndex1) || 
+    (nextProductIndex2 === productIndex2) || 
+    (nextProductIndex2 === productIndex3) ||
+    (nextProductIndex2 === nextProductIndex1) ||
+    (nextProductIndex2 === nextProductIndex3)
+    ){
+    nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
+    }
+    while(
+    (nextProductIndex3 === productIndex1) ||
+    (nextProductIndex3 === productIndex2) ||
+    (nextProductIndex3 === productIndex3) ||
+    (nextProductIndex3 === nextProductIndex1) ||
+    (nextProductIndex3 === nextProductIndex2)
   
-    while(productIndex2 ===  nextProductIndex1 || productIndex2  === nextProductIndex2 || productIndex2 === nextProductIndex3){
-        nextProductIndex2 = Math.floor(Math.random() * allProducts.length);
-    }
-    while(productIndex3 ===  nextProductIndex1 || productIndex3  === nextProductIndex2 || productIndex3 === nextProductIndex3){
-        nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
-    }
+    ){
+    nextProductIndex3 = Math.floor(Math.random() * allProducts.length);
+}
 
     // console.log('new nextProductIndex1',nextProductIndex1);
     // console.log('new nextProductIndex2',nextProductIndex2);
@@ -137,10 +163,10 @@ function imageWasClicked(event){
 
         for(let i = 0; i < allProducts.length; i++){
             let voteResultsListItem = document.createElement('li');
-            voteResultsListItem.textContent = '${allProducts[i].name} was clicked on ${allProducts[i].clicks} times and was shown ${allProducts[i].timesShown} times ';
+            voteResultsListItem.textContent = `${allProducts[i].name} was clicked on ${allProducts[i].clicks} times and was shown ${allProducts[i].timesShown} times `;
             asideUL.appendChild(voteResultsListItem);
 
-            let percentageListItem = document.createElement.length('li');
+            let percentageListItem = document.createElement('li');
             let math;
             if(allProducts[i].clicks === 0){
                 math = `Zero clicks and shown ${allProducts[i].timesShown} times. Must be a bad product.`;
@@ -161,6 +187,44 @@ function imageWasClicked(event){
     }
 }
 
+function runMyChartsNow(){
+    let ctx = document.getElementById('myChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+    data: {
+      labels: getProductArray('name'),
+      datasets: [{
+        label: '# of Votes',
+        data: getProductArray('clicks'),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
 
 
 
