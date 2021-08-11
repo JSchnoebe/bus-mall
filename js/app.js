@@ -38,17 +38,22 @@ function getProductArray(nameOfThePropertyIWant){
     return answer;
   }
 
+let savedProductString = localStorage.getItem('savedProduct');
+console.log('this is the objects in string form ', savedProductString);
 
+if(savedProductString){
+    let arrayOfNotPizzaObject = JSON.parse(savedProductString);
+    console.log('if condition what is our type ',arrayOfNotPizzaObject);
 
-
-
-
-
-
-
-
-
-
+    for(let j = 0; j < arrayOfNotPizzaObject.length; j++){
+        new Product(
+            arrayOfNotPizzaObject[j].name,
+            arrayOfNotPizzaObject[j].imageSrc,
+            arrayOfNotPizzaObject[j].clicks,
+            arrayOfNotPizzaObject[j].timesShown
+        );
+    }
+} else {
 
 new Product('R2D2 Bag', 'images/bag.jpg');
 new Product('Banana Slicer', 'images/banana.jpg');
@@ -69,6 +74,7 @@ new Product('Star Wars Sleeping Bag', 'images/tauntaun.jpg');
 new Product('Unicorn Meat', 'images/unicorn.jpg');
 new Product('Endless Water Can', 'images/water-can.jpg');
 new Product('Futuristic Wine Glass', 'images/wine-glass.jpg');
+}
 
 allProducts[0].timesShown = 1;
 allProducts[1].timesShown = 1;
